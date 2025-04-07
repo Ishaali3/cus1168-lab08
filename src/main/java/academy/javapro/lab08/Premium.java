@@ -1,58 +1,63 @@
 package academy.javapro.lab08;
 
-public class InsuranceRatingLab {
+import java.util.ArrayList;
+import java.util.List;
 
-    public static void main(String[] args) {
-        // Create the rating engine
-        InsuranceRatingEngine engine = new InsuranceRatingEngine();
+public class Premium {
+    private double baseRate;
+    private final List<Adjustment> adjustments;
 
-        // Create sample driver profiles
-        DriverProfile youngDriver = new DriverProfile(
-            19, 1, "Student", 0, 0,
-            "Honda", "Civic", 2020, false, false, false,
-            50, 500, 500, false, false
-        );
-
-        DriverProfile experiencedDriver = new DriverProfile(
-            45, 25, "Engineer", 0, 0,
-            "Toyota", "Camry", 2018, false, true, false,
-            100, 500, 500, false, false
-        );
-
-        DriverProfile seniorWithAccident = new DriverProfile(
-            70, 50, "Retired", 1, 0,
-            "Lexus", "ES", 2019, true, true, true,
-            100, 250, 250, true, true
-        );
-
-        DriverProfile riskySportsCarDriver = new DriverProfile(
-            22, 4, "Student", 2, 1,
-            "Ford", "Mustang", 2022, false, false, false,
-            30, 1000, 1000, false, false
-        );
-
-        // Calculate and display premiums for each profile
-        calculateAndDisplayPremium("Young Driver", engine, youngDriver);
-        calculateAndDisplayPremium("Experienced Driver", engine, experiencedDriver);
-        calculateAndDisplayPremium("Senior with Accident", engine, seniorWithAccident);
-        calculateAndDisplayPremium("Risky Sports Car Driver", engine, riskySportsCarDriver);
+    // Constructor
+    public Premium() {
+        this.baseRate = 0.0;
+        this.adjustments = new ArrayList<>();
     }
 
-    /**
-     * Calculates the premium for a given profile and prints the result with explanation.
-     */
-    private static void calculateAndDisplayPremium(String description, InsuranceRatingEngine engine, DriverProfile profile) {
-        System.out.println("\n===============================");
-        System.out.println("Profile: " + description);
-        System.out.println("-------------------------------");
-        System.out.println("Age: " + profile.getAge());
-        System.out.println("Vehicle: " + profile.getVehicleYear() + " " + profile.getVehicleMake() + " " + profile.getVehicleModel());
-        System.out.println("Accidents in last 5 years: " + profile.getAccidentsInLastFiveYears());
+    // Set the base rate (e.g., based on vehicle type)
+    public void setBaseRate(double baseRate) {
+        this.baseRate = baseRate;
+    }
 
-        Premium premium = engine.calculatePremium(profile);
+    // Get the base rate
+    public double getBaseRate() {
+        return baseRate;
+    }
 
-        System.out.println("\n--- Premium Details ---");
-        System.out.println(premium.getExplanation());
-        System.out.println("===============================\n");
+    // Add an adjustment (e.g., age factor, accident surcharge)
+    public void addAdjustment(String label, double amount, String explanation) {
+        adjustments.add(new Adjustment(label, amount, explanation));
+    }
+
+    // Calculate the total premium
+    public double getTotalPremium() {
+        double total = baseRate;
+        for (Adjustment adj : adjustments) {
+            total += adj.amount;
+        }
+        return total;
+    }
+
+    // Return an explanation of how the premium was calculated
+    public String getExplanation() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Base Rate: $%.2f\n", baseRate));
+        for (Adjustment adj : adjustments) {
+            sb.append(String.format("%s Adjustment: $%.2f - %s\n", adj.label, adj.amount, adj.explanation));
+        }
+        sb.append(String.format("Total Premium: $%.2f\n", getTotalPremium()));
+        return sb.toString();
+    }
+
+    // Inner class to represent individual adjustments
+    private static class Adjustment {
+        String label;
+        double amount;
+        String explanation;
+
+        Adjustment(String label, double amount, String explanation) {
+            this.label = label;
+            this.amount = amount;
+            this.explanation = explanation;
+        }
     }
 }
