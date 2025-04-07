@@ -1,7 +1,8 @@
 package academy.javapro.lab08;
 
 public class DriverProfile {
-    // Driver demographics
+    // Basic Info
+    private String name;  // NEW FIELD
     private int age;
     private int yearsOfDrivingExperience;
     private String occupation;
@@ -21,45 +22,22 @@ public class DriverProfile {
     private boolean hasDaytimeRunningLights;
 
     // Coverage options
-    private int liabilityLimit;  // in thousands
+    private int liabilityLimit;
     private int collisionDeductible;
     private int comprehensiveDeductible;
     private boolean includesRoadside;
     private boolean includesRentalCar;
 
-    // Fix the simple constructor to properly initialize fields
-    public DriverProfile(int age, int yearsOfDrivingExperience, String occupation,
-                       int accidentsInLastFiveYears, int violationsInLastThreeYears,
-                       String vehicleMake, String vehicleModel, int vehicleYear,
-                       boolean hasAntiTheftDevice, boolean hasAntiLockBrakes,
-                       boolean hasDaytimeRunningLights,
-                       int liabilityLimit, int collisionDeductible, int comprehensiveDeductible,
-                       boolean includesRoadside, boolean includesRentalCar) {
+    // ✅ Updated constructor with all important inputs
+    public DriverProfile(String name, int age, int yearsOfDrivingExperience, String occupation,
+                         int accidentsInLastFiveYears, int violationsInLastThreeYears,
+                         boolean hasCurrentInsurance, int yearsWithContinuousInsurance,
+                         String vehicleMake, String vehicleModel, int vehicleYear,
+                         boolean hasAntiTheftDevice, boolean hasAntiLockBrakes, boolean hasDaytimeRunningLights,
+                         int liabilityLimit, int collisionDeductible, int comprehensiveDeductible,
+                         boolean includesRoadside, boolean includesRentalCar) {
 
-        this.age = age;
-        this.yearsOfDrivingExperience = yearsOfDrivingExperience;
-        this.occupation = occupation;
-        this.accidentsInLastFiveYears = accidentsInLastFiveYears;
-        this.violationsInLastThreeYears = violationsInLastThreeYears;
-        this.vehicleMake = vehicleMake;
-        this.vehicleModel = vehicleModel;
-        this.vehicleYear = vehicleYear;
-        this.hasAntiTheftDevice = hasAntiTheftDevice;
-        this.hasAntiLockBrakes = hasAntiLockBrakes;
-        this.hasDaytimeRunningLights = hasDaytimeRunningLights;
-        this.liabilityLimit = liabilityLimit;
-        this.collisionDeductible = collisionDeductible;
-        this.comprehensiveDeductible = comprehensiveDeductible;
-        this.includesRoadside = includesRoadside;
-        this.includesRentalCar = includesRentalCar;
-
-        // Default values for fields not included in this constructor
-        this.hasCurrentInsurance = true;
-        this.yearsWithContinuousInsurance = 0;
-    }
-
-    // Keep the full constructor for when all fields are needed
-    public DriverProfile(int age, int yearsOfDrivingExperience, String occupation, int accidentsInLastFiveYears, int violationsInLastThreeYears, boolean hasCurrentInsurance, int yearsWithContinuousInsurance, String vehicleMake, String vehicleModel, int vehicleYear, boolean hasAntiTheftDevice, boolean hasAntiLockBrakes, boolean hasDaytimeRunningLights, int liabilityLimit, int collisionDeductible, int comprehensiveDeductible, boolean includesRoadside, boolean includesRentalCar) {
+        this.name = name;
         this.age = age;
         this.yearsOfDrivingExperience = yearsOfDrivingExperience;
         this.occupation = occupation;
@@ -80,147 +58,74 @@ public class DriverProfile {
         this.includesRentalCar = includesRentalCar;
     }
 
-    public int getAge() {
-        return age;
-    }
+    // ✅ Getters and setters
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
 
-    public int getYearsOfDrivingExperience() {
-        return yearsOfDrivingExperience;
-    }
+    public int getYearsOfDrivingExperience() { return yearsOfDrivingExperience; }
+    public void setYearsOfDrivingExperience(int yearsOfDrivingExperience) { this.yearsOfDrivingExperience = yearsOfDrivingExperience; }
 
-    public void setYearsOfDrivingExperience(int yearsOfDrivingExperience) {
-        this.yearsOfDrivingExperience = yearsOfDrivingExperience;
-    }
+    public String getOccupation() { return occupation; }
+    public void setOccupation(String occupation) { this.occupation = occupation; }
 
-    public String getOccupation() {
-        return occupation;
-    }
+    public int getAccidentsInLastFiveYears() { return accidentsInLastFiveYears; }
+    public void setAccidentsInLastFiveYears(int accidentsInLastFiveYears) { this.accidentsInLastFiveYears = accidentsInLastFiveYears; }
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
+    public int getViolationsInLastThreeYears() { return violationsInLastThreeYears; }
+    public void setViolationsInLastThreeYears(int violationsInLastThreeYears) { this.violationsInLastThreeYears = violationsInLastThreeYears; }
 
-    public int getAccidentsInLastFiveYears() {
-        return accidentsInLastFiveYears;
-    }
+    public boolean hasCurrentInsurance() { return hasCurrentInsurance; }
+    public void setHasCurrentInsurance(boolean hasCurrentInsurance) { this.hasCurrentInsurance = hasCurrentInsurance; }
 
-    public void setAccidentsInLastFiveYears(int accidentsInLastFiveYears) {
-        this.accidentsInLastFiveYears = accidentsInLastFiveYears;
-    }
+    public int getYearsWithContinuousInsurance() { return yearsWithContinuousInsurance; }
+    public void setYearsWithContinuousInsurance(int yearsWithContinuousInsurance) { this.yearsWithContinuousInsurance = yearsWithContinuousInsurance; }
 
-    public int getViolationsInLastThreeYears() {
-        return violationsInLastThreeYears;
-    }
+    public String getVehicleMake() { return vehicleMake; }
+    public void setVehicleMake(String vehicleMake) { this.vehicleMake = vehicleMake; }
 
-    public void setViolationsInLastThreeYears(int violationsInLastThreeYears) {
-        this.violationsInLastThreeYears = violationsInLastThreeYears;
-    }
+    public String getVehicleModel() { return vehicleModel; }
+    public void setVehicleModel(String vehicleModel) { this.vehicleModel = vehicleModel; }
 
-    public boolean isHasCurrentInsurance() {
-        return hasCurrentInsurance;
-    }
+    public int getVehicleYear() { return vehicleYear; }
+    public void setVehicleYear(int vehicleYear) { this.vehicleYear = vehicleYear; }
 
-    public void setHasCurrentInsurance(boolean hasCurrentInsurance) {
-        this.hasCurrentInsurance = hasCurrentInsurance;
-    }
+    public boolean hasAntiTheftDevice() { return hasAntiTheftDevice; }
+    public void setHasAntiTheftDevice(boolean hasAntiTheftDevice) { this.hasAntiTheftDevice = hasAntiTheftDevice; }
 
-    public int getYearsWithContinuousInsurance() {
-        return yearsWithContinuousInsurance;
-    }
+    public boolean hasAntiLockBrakes() { return hasAntiLockBrakes; }
+    public void setHasAntiLockBrakes(boolean hasAntiLockBrakes) { this.hasAntiLockBrakes = hasAntiLockBrakes; }
 
-    public void setYearsWithContinuousInsurance(int yearsWithContinuousInsurance) {
-        this.yearsWithContinuousInsurance = yearsWithContinuousInsurance;
-    }
+    public boolean hasDaytimeRunningLights() { return hasDaytimeRunningLights; }
+    public void setHasDaytimeRunningLights(boolean hasDaytimeRunningLights) { this.hasDaytimeRunningLights = hasDaytimeRunningLights; }
 
-    public String getVehicleMake() {
-        return vehicleMake;
-    }
+    public int getLiabilityLimit() { return liabilityLimit; }
+    public void setLiabilityLimit(int liabilityLimit) { this.liabilityLimit = liabilityLimit; }
 
-    public void setVehicleMake(String vehicleMake) {
-        this.vehicleMake = vehicleMake;
-    }
+    public int getCollisionDeductible() { return collisionDeductible; }
+    public void setCollisionDeductible(int collisionDeductible) { this.collisionDeductible = collisionDeductible; }
 
-    public String getVehicleModel() {
-        return vehicleModel;
-    }
+    public int getComprehensiveDeductible() { return comprehensiveDeductible; }
+    public void setComprehensiveDeductible(int comprehensiveDeductible) { this.comprehensiveDeductible = comprehensiveDeductible; }
 
-    public void setVehicleModel(String vehicleModel) {
-        this.vehicleModel = vehicleModel;
-    }
+    public boolean includesRoadside() { return includesRoadside; }
+    public void setIncludesRoadside(boolean includesRoadside) { this.includesRoadside = includesRoadside; }
 
-    public int getVehicleYear() {
-        return vehicleYear;
-    }
+    public boolean includesRentalCar() { return includesRentalCar; }
+    public void setIncludesRentalCar(boolean includesRentalCar) { this.includesRentalCar = includesRentalCar; }
 
-    public void setVehicleYear(int vehicleYear) {
-        this.vehicleYear = vehicleYear;
-    }
-
-    public boolean isHasAntiTheftDevice() {
-        return hasAntiTheftDevice;
-    }
-
-    public void setHasAntiTheftDevice(boolean hasAntiTheftDevice) {
-        this.hasAntiTheftDevice = hasAntiTheftDevice;
-    }
-
-    public boolean isHasAntiLockBrakes() {
-        return hasAntiLockBrakes;
-    }
-
-    public void setHasAntiLockBrakes(boolean hasAntiLockBrakes) {
-        this.hasAntiLockBrakes = hasAntiLockBrakes;
-    }
-
-    public boolean isHasDaytimeRunningLights() {
-        return hasDaytimeRunningLights;
-    }
-
-    public void setHasDaytimeRunningLights(boolean hasDaytimeRunningLights) {
-        this.hasDaytimeRunningLights = hasDaytimeRunningLights;
-    }
-
-    public int getLiabilityLimit() {
-        return liabilityLimit;
-    }
-
-    public void setLiabilityLimit(int liabilityLimit) {
-        this.liabilityLimit = liabilityLimit;
-    }
-
-    public int getCollisionDeductible() {
-        return collisionDeductible;
-    }
-
-    public void setCollisionDeductible(int collisionDeductible) {
-        this.collisionDeductible = collisionDeductible;
-    }
-
-    public int getComprehensiveDeductible() {
-        return comprehensiveDeductible;
-    }
-
-    public void setComprehensiveDeductible(int comprehensiveDeductible) {
-        this.comprehensiveDeductible = comprehensiveDeductible;
-    }
-
-    public boolean isIncludesRoadside() {
-        return includesRoadside;
-    }
-
-    public void setIncludesRoadside(boolean includesRoadside) {
-        this.includesRoadside = includesRoadside;
-    }
-
-    public boolean isIncludesRentalCar() {
-        return includesRentalCar;
-    }
-
-    public void setIncludesRentalCar(boolean includesRentalCar) {
-        this.includesRentalCar = includesRentalCar;
+    @Override
+    public String toString() {
+        return "DriverProfile{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", experience=" + yearsOfDrivingExperience +
+                ", occupation='" + occupation + '\'' +
+                ", accidents=" + accidentsInLastFiveYears +
+                ", violations=" + violationsInLastThreeYears +
+                ", vehicle=" + vehicleMake + " " + vehicleModel + " " + vehicleYear +
+                '}';
     }
 }
