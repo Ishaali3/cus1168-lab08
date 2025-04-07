@@ -1,77 +1,58 @@
 package academy.javapro.lab08;
 
-import java.util.HashMap;
-import java.util.Map;
+public class InsuranceRatingLab {
 
-public class Premium {
-    private double baseRate;
-    private Map<String, Double> adjustments = new HashMap<>();
-    private Map<String, String> explanations = new HashMap<>();
+    public static void main(String[] args) {
+        // Create the rating engine
+        InsuranceRatingEngine engine = new InsuranceRatingEngine();
 
-    public void addAdjustment(String reason, double amount, String explanation) {
-        adjustments.put(reason, amount);
-        explanations.put(reason, explanation);
+        // Create sample driver profiles
+        DriverProfile youngDriver = new DriverProfile(
+            19, 1, "Student", 0, 0,
+            "Honda", "Civic", 2020, false, false, false,
+            50, 500, 500, false, false
+        );
+
+        DriverProfile experiencedDriver = new DriverProfile(
+            45, 25, "Engineer", 0, 0,
+            "Toyota", "Camry", 2018, false, true, false,
+            100, 500, 500, false, false
+        );
+
+        DriverProfile seniorWithAccident = new DriverProfile(
+            70, 50, "Retired", 1, 0,
+            "Lexus", "ES", 2019, true, true, true,
+            100, 250, 250, true, true
+        );
+
+        DriverProfile riskySportsCarDriver = new DriverProfile(
+            22, 4, "Student", 2, 1,
+            "Ford", "Mustang", 2022, false, false, false,
+            30, 1000, 1000, false, false
+        );
+
+        // Calculate and display premiums for each profile
+        calculateAndDisplayPremium("Young Driver", engine, youngDriver);
+        calculateAndDisplayPremium("Experienced Driver", engine, experiencedDriver);
+        calculateAndDisplayPremium("Senior with Accident", engine, seniorWithAccident);
+        calculateAndDisplayPremium("Risky Sports Car Driver", engine, riskySportsCarDriver);
     }
 
-    public double calculateTotalPremium() {
-        double total = baseRate;
-        for (double adjustment : adjustments.values()) {
-            total += adjustment;
-        }
-        return total;
-    }
+    /**
+     * Calculates the premium for a given profile and prints the result with explanation.
+     */
+    private static void calculateAndDisplayPremium(String description, InsuranceRatingEngine engine, DriverProfile profile) {
+        System.out.println("\n===============================");
+        System.out.println("Profile: " + description);
+        System.out.println("-------------------------------");
+        System.out.println("Age: " + profile.getAge());
+        System.out.println("Vehicle: " + profile.getVehicleYear() + " " + profile.getVehicleMake() + " " + profile.getVehicleModel());
+        System.out.println("Accidents in last 5 years: " + profile.getAccidentsInLastFiveYears());
 
-    public String getExplanation() {
-        StringBuilder explanation = new StringBuilder();
-        explanation.append("Base rate: $").append(String.format("%.2f", baseRate)).append("\n");
+        Premium premium = engine.calculatePremium(profile);
 
-        for (String reason : adjustments.keySet()) {
-            double amount = adjustments.get(reason);
-            explanation.append(reason).append(": ");
-            if (amount >= 0) {
-                explanation.append("+");
-            }
-            explanation.append("$").append(String.format("%.2f", amount));
-            explanation.append(" (").append(explanations.get(reason)).append(")\n");
-        }
-
-        explanation.append("Total premium: $")
-                  .append(String.format("%.2f", calculateTotalPremium()));
-
-        return explanation.toString();
-    }
-
-    public Premium() {
-    }
-
-    public Premium(double baseRate, Map<String, Double> adjustments, Map<String, String> explanations) {
-        this.baseRate = baseRate;
-        this.adjustments = adjustments;
-        this.explanations = explanations;
-    }
-
-    public double getBaseRate() {
-        return baseRate;
-    }
-
-    public void setBaseRate(double baseRate) {
-        this.baseRate = baseRate;
-    }
-
-    public Map<String, Double> getAdjustments() {
-        return adjustments;
-    }
-
-    public void setAdjustments(Map<String, Double> adjustments) {
-        this.adjustments = adjustments;
-    }
-
-    public Map<String, String> getExplanations() {
-        return explanations;
-    }
-
-    public void setExplanations(Map<String, String> explanations) {
-        this.explanations = explanations;
+        System.out.println("\n--- Premium Details ---");
+        System.out.println(premium.getExplanation());
+        System.out.println("===============================\n");
     }
 }
-
